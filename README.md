@@ -51,4 +51,4 @@ The original algorithm was made by Microsoft.
 This Rust port was made by BioTomateDE.
 
 This crate is re-licensed under the [MIT license](https://opensource.org/license/mit).
-See the attached [LICENSE] file for more information.
+See the attached LICENSE file for more information.
