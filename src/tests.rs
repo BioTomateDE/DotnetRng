@@ -1,3 +1,4 @@
+// More tests are always welcome!
 use super::DotnetRng;
 
 #[test]

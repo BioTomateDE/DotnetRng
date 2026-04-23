@@ -1,6 +1,6 @@
 [package]
 name = "dotnet-rng"
-version = "1.0.1"
+version = "1.0.2"
 authors = ["BioTomateDE <biotomatede@proton.me>", "Microsoft"]
 edition = "2024"
 rust-version = "1.85.1"
@@ -9,7 +9,7 @@ readme = "README.md"
 repository = "https://codeberg.org/BioTomateDE/DotnetRNG"
 license = "MIT"
 keywords = ["rng", "random", "dotnet", "knuth"]
-categories = ["no-std::no-alloc", "algorithms", "mathematics", "embedded"]
+categories = ["no-std", "no-std::no-alloc", "algorithms", "mathematics"]
 
 [badges]
 maintenance.status = "as-is"

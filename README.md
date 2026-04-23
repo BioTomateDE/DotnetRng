@@ -7,6 +7,7 @@ This crate is:
 * compatible with embedded systems (`no_std` and `no_alloc`)
 * entirely usable in constant evaluation (all functions are marked as `const`)
 * platform-independent (no usage of `usize` or pointers in `struct`s)
+* tested to match exactly with .NET generated values
 
 ## Usage
 ```rust
@@ -41,10 +42,17 @@ assert_eq!(rng.next(), new_rng.next());
 assert_eq!(rng.next_f64(), new_rng.next_f64());
 ```
 
+## Purpose
+This crate is not intended to be the best or fastest random number generator.
+Its purpose is to mimic .NET's RNG algorithm exactly.
+
+If you just need random numbers, you should use the `rand` crate.
+If you need to get the exact pseudorandom values that you
+would get for the same seed in .NET, then this crate is for you.
+
 ## Reference 
 The algorithm is taken from
-<https://github.com/microsoft/referencesource/blob/ec9fa9ae770d522a5b5f0607898044b7478574a3/mscorlib/system/random.cs>
-(accessed: 2026-03-31).
+<https://github.com/microsoft/referencesource/blob/ec9fa9ae770d522a5b5f0607898044b7478574a3/mscorlib/system/random.cs>.
 
 ## License
 The original algorithm was made by Microsoft.

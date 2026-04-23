@@ -11,10 +11,12 @@ mod tests;
 /// MSEED ≈ φ * 10^8
 const MSEED: i32 = 161_803_398;
 
-/// A deterministic random number generator.
+/// The random number generator used by **.NET**.
 ///
-/// This RNG algorithm is used by .NET and is
-/// based on Knuth's subtractive method.
+/// All instances of this struct initialized with
+/// the same seed will always produce the same values.
+///
+/// This struct's size is 228 bytes on all platforms and architectures.
 ///
 /// For more information, see the [module level documentation](self).
 #[derive(Clone)]
@@ -25,11 +27,7 @@ pub struct DotnetRng {
 }
 
 impl DotnetRng {
-    /// Creates a new [`DotnetRng`] instance based on the given seed.
-    ///
-    /// All methods will return the same "random" numbers for an RNG
-    /// instance with the same state. The state is determined by the seed
-    /// and the number of imes [`DotnetRng::next`] has been called in total.
+    /// Creates a new .NET random number generator with the given seed.
     #[must_use]
     pub const fn new(seed: i32) -> Self {
         let seed: i32 = if seed == i32::MIN {
@@ -82,7 +80,11 @@ impl DotnetRng {
             i += 1;
         }
 
-        Self { seed_array, inext: 0, inextp: 21 }
+        Self {
+            seed_array,
+            inext: 0,
+            inextp: 21,
+        }
     }
 
     /// Generates a new number and throws it away.
@@ -94,16 +96,12 @@ impl DotnetRng {
         let _ = self.next();
     }
 
-    /// Gets the next pseudorandom 32-bit signed integer based
-    /// on the state of this [`DotnetRng`] instance.
+    /// Generates the next 32-bit signed integer
+    /// and advances the state of the RNG.
     ///
     /// **Range**: [`i32::MIN`] .. [`i32::MAX`]
-    ///
-    /// For the same internal state, this will always return the same number.
-    ///
-    /// The state is simply determined by the given seed and how many times
-    /// [`Self::next`] has been called before.
     #[doc(alias = "next_i32")]
+    #[doc(alias = "next_int")]
     #[must_use = "if you intend to only advance the internal rng state, use `.skip()`"]
     pub const fn next(&mut self) -> i32 {
         let mut index1: u8 = self.inext + 1;
@@ -133,14 +131,12 @@ impl DotnetRng {
         num
     }
 
-    /// Gets the next signed 32-bit integer within the given range.
+    /// Generates the next signed 32-bit integer within the given range.
     ///
     /// **Range**: `min` .. `max`
     ///
-    /// If the range is [`i32::MAX`] or larger, a slighty different algorithm
+    /// If the range is [`i32::MAX`] or larger, a slightly different algorithm
     /// is used which internally calls `.next()` twice instead of once.
-    ///
-    /// For more information on number generation, see [`DotnetRng::next`].
     ///
     /// # Panics
     /// This function will panic if `min > max`.
@@ -165,11 +161,9 @@ impl DotnetRng {
         (num * range) as i32 + min
     }
 
-    /// Gets the next double-precision floating point number.
+    /// Generates the next double-precision floating point number.
     ///
     /// **Range**: 0 .. 1
-    ///
-    /// For more information on number generation, see [`DotnetRng::next`].
     #[doc(alias = "next_double")]
     #[inline]
     #[must_use = "if you intend to only advance the internal rng state, use `.skip()`"]
@@ -185,8 +179,6 @@ impl DotnetRng {
     ///
     /// If you have a known array size at compile-time, consider using
     /// [`DotnetRng::next_bytes`] instead.
-    ///
-    /// For more information on number generation, see [`DotnetRng::next`].
     pub const fn fill_bytes(&mut self, buffer: &mut [u8]) {
         let mut i = 0;
         while i < buffer.len() {
@@ -203,8 +195,7 @@ impl DotnetRng {
     ///
     /// If you do not have a known array size at compile-time, consider using
     /// [`DotnetRng::fill_bytes`].
-    ///
-    /// For more information on number generation, see [`DotnetRng::next`].
+    #[inline]
     #[must_use = "if you intend to only advance the internal rng state, use `.skip()`"]
     pub const fn next_bytes<const N: usize>(&mut self) -> [u8; N] {
         let mut buffer = [0u8; N];
