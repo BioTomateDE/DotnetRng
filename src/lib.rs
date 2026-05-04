@@ -57,6 +57,7 @@ impl DotnetRng {
             i += 1;
         }
 
+        // TODO(const-hack): This can be replaced with a for-loop when it is const-stable.
         i = 1;
         while i < 5 {
             let mut j: u8 = 1;

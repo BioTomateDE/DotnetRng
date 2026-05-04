@@ -3,6 +3,7 @@
 A Rust implementation of .NET's Random algorithm based on Knuth's subtractive method.
 
 This crate is:
+
 * extremely lightweight (no dependencies, low amount of code)
 * compatible with embedded systems (`no_std` and `no_alloc`)
 * entirely usable in constant evaluation (all functions are marked as `const`)
@@ -10,6 +11,7 @@ This crate is:
 * tested to match exactly with .NET generated values
 
 ## Usage
+
 ```rust
 use dotnet_rng::DotnetRng;
 
@@ -43,18 +45,21 @@ assert_eq!(rng.next_f64(), new_rng.next_f64());
 ```
 
 ## Purpose
-This crate is not intended to be the best or fastest random number generator.
+
+This crate is not intended to be the best or most efficient random number generator.
 Its purpose is to mimic .NET's RNG algorithm exactly.
 
 If you just need random numbers, you should use the `rand` crate.
 If you need to get the exact pseudorandom values that you
 would get for the same seed in .NET, then this crate is for you.
 
-## Reference 
-The algorithm is taken from
-<https://github.com/microsoft/referencesource/blob/ec9fa9ae770d522a5b5f0607898044b7478574a3/mscorlib/system/random.cs>.
+## Reference
+
+The RNG algorithm is taken from the C# System library:
+<https://github.com/microsoft/referencesource/blob/ec9fa9ae770d522a5b5f0607898044b7478574a3/mscorlib/system/random.cs>
 
 ## License
+
 The original algorithm was made by Microsoft.
 This Rust port was made by BioTomateDE.
 

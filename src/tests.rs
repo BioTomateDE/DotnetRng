@@ -1,6 +1,12 @@
 // More tests are always welcome!
 use super::DotnetRng;
 
+fn _traits() {
+    use core::panic::{RefUnwindSafe, UnwindSafe};
+    fn require<T: Clone + Send + Sync + Unpin + UnwindSafe + RefUnwindSafe>() {}
+    require::<DotnetRng>();
+}
+
 #[test]
 fn size() {
     assert_eq!(size_of::<DotnetRng>(), 228);
