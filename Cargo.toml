@@ -1,15 +1,16 @@
 [package]
 name = "dotnet-rng"
-version = "1.0.3"
-authors = ["BioTomateDE <biotomatede@proton.me>", "Microsoft"]
+version = "1.0.4"
+authors = ["BioTomateDE <biotomatede@proton.me>"]
 edition = "2024"
 rust-version = "1.85.1"
 description = "Implementation of .NET's Random algorithm based on Knuth's subtractive method"
 readme = "README.md"
 repository = "https://codeberg.org/BioTomateDE/DotnetRNG"
 license = "MIT"
-keywords = ["rng", "random", "dotnet", "knuth"]
+keywords = ["rng", "random", "knuth", "dotnet", "csharp"]
 categories = ["no-std", "no-std::no-alloc", "algorithms", "mathematics"]
+exclude = ["/testgen/", "/tests/"]
 
 [badges]
 maintenance.status = "as-is"
