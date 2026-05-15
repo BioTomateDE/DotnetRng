@@ -257,7 +257,7 @@ impl DotnetRng {
     pub const fn next_f32(&mut self) -> f32 {
         loop {
             let num = self.next_f64() as f32;
-            if num <= 1.0 {
+            if num < 1.0 {
                 return num;
             }
 

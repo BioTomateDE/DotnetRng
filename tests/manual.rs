@@ -109,6 +109,19 @@ fn bytes() {
     );
 }
 
+#[test]
+fn float_rounding() {
+    let mut rng = DotnetRng::new(-55038);
+    rng.skip_n(1824);
+    let mut rng2 = rng.clone();
+    let double = rng.next_f64();
+    let float = rng2.next_f32();
+    assert!(double as f32 >= 1.0, "Double as f32: {double}");
+    // This should rejected and cause another
+    // iteration, generating a number less than 1.
+    assert!(float < 1.0, "Float: {float}");
+}
+
 // ====== Tests for output data from the .NET reference manual by Microsoft ======
 // Source: https://learn.microsoft.com/en-us/dotnet/api/system.random.next?view=net-10.0#examples
 

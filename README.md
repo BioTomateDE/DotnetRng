@@ -41,8 +41,8 @@ let mut buffer = [0u8; 187];
 rng.fill_bytes(&mut buffer);
 println!("Bytes: {buffer:?}");
 
-// Advance internal state (same as discarding rng.next() return value)
-rng.skip();
+// Advance internal state
+rng.skip();  // Same as let _ = rng.next();
 
 // RNG is deterministic
 let mut new_rng = rng.clone();
